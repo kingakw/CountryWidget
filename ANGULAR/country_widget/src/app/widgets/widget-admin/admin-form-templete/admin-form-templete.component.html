@@ -1,0 +1,80 @@
+<div class="admin-form mt-5 mb-2">
+
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+
+    <div id="new-country"
+         ngModelGroup="newCountry"
+         #newCountry="ngModelGroup">
+
+      <div class="form-lang form-group ">
+        <label class="fw-bold mb-2"
+               for="language">
+               Language for country name:
+        </label>
+        <select class="form-option form-control ps-3"
+                name="language"
+                id="language"
+                (ngModel)="myCountryPrefered.language"
+                #language="ngModel"
+                required>
+          <option *ngFor="let lang of languages"
+                [value]="lang">
+                {{lang}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-search form-group mt-5 mb-4">
+        <label class="fw-bold me-3 mb-2"
+                for="searchInput">
+                Search new country  or <br/>
+                click for random country search:
+        </label>
+        <div class="d-flex mb-2">
+          <input  class="search-input form-control ps-3 py-1"
+                  type="text"
+                  id="searchInput"
+                  name="searchInput"
+                  #searchInput="ngModel"
+                  ngModel
+                  (input)="search(searchInput.value)"
+                  placeholder=". . . write here"
+                  autocomplete="off"
+                  required
+                  pattern="[a-zA-Z ]*"
+                  appCountryMatch/>
+          <button class="search-btn btn btn-warning fw-bold ms-3"
+                  (click)='randomCountry()'>
+                  click
+          </button>
+        </div>
+
+        <div *ngIf="searchInput.invalid && (searchInput.dirty || searchInput.touched)" class="alert m-0 p-0 ms-2">
+          <small *ngIf="searchInput.errors?.['required']"> Country name is required </small>
+          <small *ngIf="searchInput.errors?.['pattern']"> Country name should contain only letters </small>
+          <small  *ngIf="searchInput.errors?.['countryMatch']"> Country name does not exist </small>
+        </div>
+
+        <div class="search-result d-grid mt-3">
+          <div *ngFor="let country of countries$ | async">
+            <button class="form-search-btn btn btn-outline-dark border-0 py-1"
+                    type="button"
+                    #countryName
+                    (click)="chooseCountry(country.name)">
+                    {{country.name}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <button class="form-btn btn btn-dark w-100 py-1"
+              type="submit"
+              [disabled]="!form.valid">
+              Confirm change & go to widget
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

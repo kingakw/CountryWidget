@@ -1,0 +1,11 @@
+<div *ngFor="let country of countryData | async">
+
+  <div *ngFor="let natName of country.name.nativeName | keyvalue">
+    <div *ngFor="let nat of [natName.value]">
+
+      <p class="fs-2 fw-bold my-0"> {{ nat.common }} </p>
+      <p class="fs-3 fw-lighter mt-0 mb-4"> {{ nat.official }} </p>
+
+    </div>
+  </div>
+</div>

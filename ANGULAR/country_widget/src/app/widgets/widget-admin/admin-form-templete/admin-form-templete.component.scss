@@ -1,0 +1,41 @@
+.admin-form {
+  width: 22rem;
+}
+
+.search-input,
+.form-option {
+  width: 20rem;
+  height: 4rem;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+}
+
+.form-option {
+  height: 2.5rem;
+}
+
+.form-search-btn {
+  width: 15.5rem;
+  border-radius: 0;
+}
+
+.form-btn:hover {
+  background-color: #ffc107;
+  border: 3px solid #ffc107;
+  color: black;
+  font-weight: 600;
+}
+
+.search-btn {
+  border-radius: 50%;
+}
+
+.alert {
+  color: #a94442;
+  font-weight: 500;
+}
+
+input.ng-invalid[required].ng-touched,
+select.ng-invalid[required].ng-touched {
+  border-left: 8px solid #a94442;
+}

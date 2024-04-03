@@ -1,0 +1,21 @@
+<div  [ngStyle]="{backgroundImage: setBackground()}"
+      class="wrapper d-flex justify-content-center align-items-start">
+
+  <div class="admin-container rounded-3 shadow m-0 m-5">
+    <div class="card-body m-0 p-4">
+
+      <app-header></app-header>
+      <p class="card-title fs-5 text-uppercase">administrator panel</p>
+
+      <div class="d-flex flex-column align-items-center">
+        <app-admin-form-reactive></app-admin-form-reactive>
+        <button type="button"
+                class="admin-btn btn btn-outline-dark fw-bolder py-1"
+                (click)="goToWidget()">
+                Go back to widget
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

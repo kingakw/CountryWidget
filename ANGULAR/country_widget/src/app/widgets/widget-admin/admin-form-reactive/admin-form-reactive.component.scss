@@ -1,0 +1,64 @@
+.admin-form {
+  width: 22rem;
+}
+
+.search-input,
+.form-option {
+  width: 22rem;
+  height: 4rem;
+  border: 1px solid lightgray;
+  border-radius: 0.5rem;
+}
+
+.form-option {
+  height: 2.5rem;
+}
+
+.form-btn:hover {
+  background-color: #ffc107;
+  border: 1px solid #ffc107;
+  color: black;
+}
+
+.search-btn {
+  border-radius: 50%;
+}
+
+.fav-btn {
+  border-width: 0.12rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.fav-btn span {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.fav-btn span i {
+  font-size: 2rem;
+}
+
+.fav-input span {
+  background-color: transparent;
+}
+
+.fav-input .btn:hover {
+  border: none;
+  color: #dc3545;
+  font-weight: 700;
+}
+
+.alert {
+  color: #a94442;
+  font-weight: 500;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border-left: 8px solid #a94442;
+}
+
+.fav-input input.ng-valid.ng-touched {
+  border-left: 8px solid #42A948;
+}

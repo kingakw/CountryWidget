@@ -1,0 +1,22 @@
+.wrapper {
+  background-color: gray;
+  width: 100vw;
+  height: 120vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.admin-container {
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(255, 255, 255,.85);
+  opacity: 0.9;
+  color: black;
+  font-weight: 400;
+  min-width: 50vw;
+}
+
+.admin-btn {
+  width: 22rem;
+}

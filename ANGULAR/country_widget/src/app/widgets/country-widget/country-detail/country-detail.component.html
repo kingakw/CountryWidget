@@ -1,0 +1,38 @@
+<div *ngFor="let country of countryData | async" class="mx-0 p-0 my-3">
+  <div class="country-info ">
+
+    <div class="d-flex flex-column flex-xl-row justify-content-xl-between">
+      <app-country-name *ngIf="selectedLanguage === 'english'; else nativeLang" [countryData]="countryData">
+      </app-country-name>
+      <ng-template #nativeLang>
+        <app-country-native-name [countryData]="countryData"> </app-country-native-name>
+      </ng-template>
+
+      <div class="country-flag ps-xl-3">
+        <img [src]="country.flags.svg" alt="{{country.flags.alt}}" class="card-flag img-responsive rounded mt-1">
+      </div>
+    </div>
+
+    <div>
+      <ul class="m-0 p-0 mt-4">
+        <li class="list-unstyled info">capital: <span class="data ms-2">{{ country.capital }}</span></li>
+        <li class="list-unstyled info">subregion: <span class="data ms-2">{{ country.subregion }}</span></li>
+        <li class="list-unstyled info">continent: <span class="data ms-2">{{ country.continents }}</span></li>
+        <li class="list-unstyled info d-flex flex-row">languages:
+          <div *ngFor="let lang of country.languages | keyvalue" class="data ms-2">{{ lang.value }} </div>
+        </li>
+        <li class="list-unstyled info d-flex flex-row">currency:
+          <div *ngFor="let curriency of country.currencies | keyvalue">
+            <div *ngFor="let curr of [curriency.value] " class="data ms-2 text-lowercase"> {{ curr.name }}</div>
+          </div>
+        </li>
+        <li class="list-unstyled info mt-3">area: <span class="data ms-2">{{ country.area | number: '1.0-0' }}</span>
+          km&#178;</li>
+        <li class="list-unstyled info">population: <span
+            class="data ms-2">{{ country.population | number: '1.0-0' }}</span></li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

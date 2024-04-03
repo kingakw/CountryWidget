@@ -1,0 +1,138 @@
+<div class="admin-form mt-4 mb-2">
+
+  <form class="form-flag form-group">
+    <p class="fw-bold mb-2">Show current country flag as background</p>
+    <div class="d-flex justify-content-center">
+      <app-slide-toggle
+        [formControl]="showFlag"
+        checkedText="Yes"
+        uncheckedText="No">
+      </app-slide-toggle>
+    </div>
+  </form>
+
+  <form [formGroup]="chooseCountryForm" (ngSubmit)="onSubmit()">
+
+    <div formGroupName="countrySearch">
+      <div class="form-lang form-group mt-4">
+        <label class="fw-bold mb-2"
+               for="language">
+               Language for country name:
+        </label>
+        <select class="form-option form-control ps-3"
+                name="language"
+                id="language"
+                formControlName="language">
+          <option *ngFor="let lang of languages"
+                  [ngValue]="lang">
+                  {{lang}}
+          </option>
+        </select>
+        <small
+        *ngIf="!chooseCountryForm.get('countrySearch.language')?.valid
+                && chooseCountryForm.get('countrySearch.language')?.touched"
+                class="alert m-0 p-0 ms-2">
+          Please choose language
+        </small>
+      </div>
+
+      <div class="form-search form-group mt-4">
+        <label class="fw-bold me-3 mb-2"
+                for="searchinput">
+                Search new country  or <br/>
+                click for random country search:
+        </label>
+        <div class="d-flex mb-2">
+          <input  class="search-input form-control text-lowercase ps-3 py-1 "
+                  type="text"
+                  id="searchinput"
+                  formControlName="searchinput"
+                  placeholder=". . . write here"
+                  autocomplete="off"
+                  (keydown.enter)="$event.preventDefault()"/>
+          <button class="search-btn btn btn-warning fw-bold ms-3"
+                  (click)='randomCountry()'
+                  (keydown.enter)="$event.preventDefault()">
+                  click
+          </button>
+        </div>
+
+        <div *ngIf="chooseCountryForm.get('countrySearch.searchinput')?.touched" class="alert m-0 p-0 ms-2">
+          <small *ngIf="chooseCountryForm.get('countrySearch.searchinput')?.errors?.['required']">
+            Please choose a new country
+          </small>
+          <small *ngIf="chooseCountryForm.get('countrySearch.searchinput')?.errors?.['pattern']">
+            Country name should contain only letters
+          </small>
+          <small *ngIf="chooseCountryForm.get('countrySearch.searchinput')?.errors?.['noTermMatch']">
+            Country name does not exist
+          </small>
+          <small *ngIf="chooseCountryForm.get('countrySearch.searchinput')?.dirty
+                  && !chooseCountryForm.get('countrySearch.searchinput')?.errors?.['noTermMatch']
+                  && chooseCountryForm.get('countrySearch.searchinput')?.errors?.['noFullName']">
+            Please use full country name
+          </small>
+        </div>
+      </div>
+
+    </div>
+
+    <div formArrayName="newFavorites">
+      <div class="form-fav d-flex justify-content-between align-items-center mt-4 mb-2">
+        <button class="fav-btn btn btn-outline-danger btn-lg rounded-5 d-flex justify-content-between align-items-center p-1"
+                type="button"
+                (click)="onAddFav()">
+           &nbsp;&nbsp;Add
+          <span class="bg-light ms-2 rounded-5 d-flex align-items-center justify-content-center">
+            <i class="bi bi-globe-americas text-danger"></i>
+          </span>
+        </button>
+        <div class="fw-bold me-3 mb-2 lh-sm text-end">Your favourites countries
+          <small class="fw-normal text-muted">*max 3 countries</small>
+        </div>
+      </div>
+      <div class="form-group" *ngFor="let favControl of getControls() | slice:0:3; let i = index ">
+        <div class="fav-input input-group input-group-sm mb-3" [id]="i">
+          <span class="input-group-text px-4">
+            <i class="bi bi-suit-heart"></i>
+          </span>
+          <input class="form-control text-lowercase"
+                 type="text"
+                 [formControlName]="i"
+                 placeholder="country name"
+                 minlength="3"
+                 autocomplete="off"
+                 (keydown.enter)="$event.preventDefault()">
+          <button class="btn px-4"
+                  type="button"
+                  (click)="removeFav(i)">
+                  X
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="favorites d-grid gap-3 d-md-flex justify-content-md-end mt-3">
+      <div class="btn-group" role="group" *ngFor="let fav of userFavorites">
+          <button class="btn btn-outline-danger btn-sm d-flex justify-content-between align-items-center border-0 pe-1"
+                  type="button"
+                  (click)="setCountry(fav.name)">
+                  <i class="bi bi-suit-heart pe-2"></i>
+                  {{fav.name}}
+          </button>
+          <button class="btn btn-outline-danger btn-sm border-0 ps-1"
+                  type="button"
+                  (click)="deleteFav(fav.name)">
+                  X
+          </button>
+      </div>
+    </div>
+
+    <button class="form-btn btn btn-dark fw-bolder w-100 py-1 mt-3"
+            type="submit"
+            [disabled]="!chooseCountryForm.valid">
+            Confirm a country change
+    </button>
+  </form>
+
+</div>

@@ -1,0 +1,6 @@
+<div *ngFor="let country of countryData | async" class="d-flex flex-row justify-content-between mx-0 p-0 mt-2 mb-3">
+  <div>
+     <p class="fs-2 fw-bold my-0"> {{ country.name.common }} </p>
+     <p class="fs-5 fw-lighter mt-0 mb-2"> {{ country.name.official }} </p>
+  </div>
+</div>
